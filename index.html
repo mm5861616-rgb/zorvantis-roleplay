@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zorvantis Roleplay – FiveM Server</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06080e;--ink:#eef2f8;--mute:#9aa6ba;--or:#ff7a1a;--bl:#1aa6ff;--glass:rgba(255,255,255,.055);--edge:rgba(255,255,255,.14);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden;
+cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M3 2l17 8.5-7 2.2-2.6 7.3z' fill='%23868b94' stroke='%230b0b0c' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 3 2,auto}
+a,button,.card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M3 2l17 8.5-7 2.2-2.6 7.3z' fill='%23d0d4da' stroke='%230b0b0c' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 3 2,pointer}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(60% 50% at 0% 0%,rgba(26,166,255,.16),transparent 70%),radial-gradient(60% 50% at 100% 100%,rgba(255,122,26,.16),transparent 70%);pointer-events:none;z-index:-1}
+h1,h2,h3{font-family:'Saira Condensed',Impact,sans-serif;margin:0;line-height:1;letter-spacing:.01em}
+.wrap{width:min(1120px,100% - 40px);margin:0 auto}
+.glass{background:var(--glass);border:1px solid var(--edge);border-radius:18px;backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 20px 50px -20px rgba(0,0,0,.8)}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;padding:14px 0}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;border-radius:999px}
+nav b{font:800 22px 'Saira Condensed',sans-serif;letter-spacing:.04em}
+nav b i{font-style:normal;color:var(--or)}
+nav div{display:flex;gap:22px;font-size:15px;color:var(--mute)}
+nav a{color:inherit;text-decoration:none;transition:color .2s}nav a:hover{color:var(--ink)}
+.hero{position:relative;min-height:100svh;display:grid;align-items:end;padding:max(110px,41vw) 0 60px;overflow:hidden}
+.hero img{position:absolute;top:0;left:-3%;width:106%;height:auto;min-height:56vw;object-fit:cover;object-position:top;z-index:-1;transition:transform .25s ease-out;filter:saturate(1.1)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,8,14,.25) 0,rgba(6,8,14,0) 18%,rgba(6,8,14,0) 45%,var(--bg) 62vw)}
+.panel{padding:28px;display:grid;gap:22px;max-width:760px;opacity:0;transform:translateY(24px);animation:in .9s .2s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.status{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:8px 16px;border-radius:999px;width:fit-content;border:1px solid var(--edge);background:rgba(0,0,0,.35)}
+.dot{width:10px;height:10px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 12px #ff4d4d}
+.status.on .dot{background:#35e08a;box-shadow:0 0 14px #35e08a;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 4px #35e08a}}
+.hero h1{font-size:clamp(40px,7vw,78px);font-weight:800}
+.hero p{margin:0;color:var(--mute);max-width:52ch}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.timer div{padding:14px 8px;text-align:center;border-radius:14px;background:rgba(0,0,0,.35);border:1px solid var(--edge);position:relative;overflow:hidden}
+.timer div::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--bl),var(--or))}
+.timer b{display:block;font:800 clamp(34px,6vw,56px)/1 'Saira Condensed',sans-serif;font-variant-numeric:tabular-nums}
+.timer b.tick{animation:tick .35s}
+@keyframes tick{from{transform:translateY(-8px);opacity:.3}}
+.timer span{font-size:13px;color:var(--mute)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:700;color:#fff;text-decoration:none;border:1px solid var(--edge);background:var(--glass);transition:transform .2s,box-shadow .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.or{background:linear-gradient(135deg,#ff8a2b,#ff5a12);border-color:#ffb27a;box-shadow:0 10px 30px -10px rgba(255,110,20,.8)}
+.btn.bl{background:linear-gradient(135deg,#2bb3ff,#1470ff);border-color:#8ad2ff;box-shadow:0 10px 30px -10px rgba(26,140,255,.8)}
+.btn:focus-visible,nav a:focus-visible{outline:2px solid #fff;outline-offset:3px}
+section{padding:90px 0}
+h2{font-size:clamp(34px,5vw,54px);font-weight:800;margin-bottom:14px}
+.lead{color:var(--mute);max-width:60ch;margin:0 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{padding:26px;position:relative;overflow:hidden;transition:border-color .25s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--x,50%) var(--y,0%),rgba(255,140,40,.22),rgba(26,166,255,.12) 50%,transparent 70%);opacity:0;transition:opacity .3s}
+.card:hover::before{opacity:1}.card:hover{border-color:rgba(255,160,80,.5)}
+.card>*{position:relative}
+.card h3{font-size:28px;margin-bottom:8px}
+.card p{margin:0;color:var(--mute);font-size:15.5px}
+.studio{display:grid;gap:18px;grid-template-columns:1.2fr 1fr;align-items:stretch}
+.studio .glass{padding:34px}
+.studio h2{font-size:clamp(30px,4vw,44px)}
+.studio p{color:var(--mute);margin:0 0 14px}
+.links{display:grid;gap:12px;align-content:center}
+.links .btn{justify-content:space-between;padding:18px 22px}
+footer{padding:40px 0 60px;color:var(--mute);font-size:14px;text-align:center}
+@media(max-width:760px){nav div{display:none}.studio{grid-template-columns:1fr}.timer{gap:8px}.panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.panel{opacity:1;transform:none}}
+</style></head><body>
+<nav><div class="wrap glass"><b>ZORVANTIS<i> RP</i></b><div><a href="#server">Server</a><a href="#studio">Nexus Studios</a><a href="#community">Community</a></div></div></nav>
+
+<header class="hero" id="top">
+<img id="bg" alt="Zorvantis Roleplay Banner" src="banner.gif">
+<div class="wrap"><div class="panel glass">
+<div class="status" id="status"><span class="dot"></span><span id="stext">Status: Offline</span></div>
+<h1>Zorvantis Roleplay</h1>
+<p id="sub">Der Server startet am 10.03.2027. Bis dahin läuft der Countdown.</p>
+<div class="timer" id="timer"><div><b id="d">00</b><span>Tage</span></div><div><b id="h">00</b><span>Stunden</span></div><div><b id="m">00</b><span>Minuten</span></div><div><b id="s">00</b><span>Sekunden</span></div></div>
+<div class="btns">
+<a class="btn bl" href="https://discord.com/invite/bdXzRa93M3" target="_blank" rel="noopener">Discord beitreten</a>
+<a class="btn or" href="https://zorvantis-rp-forum.bolt.host" target="_blank" rel="noopener">Zum Forum</a>
+<a class="btn" href="https://www.tiktok.com/@zorvantisroleplay_fivem?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">TikTok ansehen</a>
+</div></div></div>
+</header>
+
+<section id="server"><div class="wrap">
+<h2>Ein Server, gebaut wie auf RageMP</h2>
+<p class="lead">Zorvantis Roleplay läuft auf FiveM und orientiert sich in Aufbau und Spielgefühl an großen RageMP-Servern: klare Systeme, viel Fortschritt, ein Team, das die Regeln durchsetzt.</p>
+<div class="grid">
+<div class="card glass"><h3>Fortschritt</h3><p>Battlepass, Timecoins und Visum-Stufen belohnen jede Spielstunde.</p></div>
+<div class="card glass"><h3>Familien</h3><p>Gründe eine Familie mit 10 Rängen und kaufe euer eigenes Familienhaus.</p></div>
+<div class="card glass"><h3>Eigene Systeme</h3><p>HUD, Interaktionsmenü und Bossmenüs entstehen im eigenen Haus.</p></div>
+<div class="card glass"><h3>Faire Moderation</h3><p>Ein festes Team aus Admins, Developern und Management betreut den Server.</p></div>
+</div></div></section>
+
+<section id="studio"><div class="wrap studio">
+<div class="glass"><h2>Entwickelt von Nexus Studios</h2>
+<p>Zorvantis Roleplay ist das Projekt von Nexus Studios, unserem eigenen Studio. Skripte, Oberfläche und Server-Aufbau kommen aus einer Hand.</p>
+<p>Neuigkeiten zum Release erscheinen zuerst auf Discord und im Forum.</p></div>
+<div class="glass links" id="community">
+<a class="btn bl" href="https://discord.com/invite/bdXzRa93M3" target="_blank" rel="noopener">Discord Server</a>
+<a class="btn or" href="https://zorvantis-rp-forum.bolt.host" target="_blank" rel="noopener">Forum</a>
+<a class="btn" href="https://www.tiktok.com/@zorvantisroleplay_fivem?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">TikTok</a>
+</div></div></section>
+
+<footer>© 2026 Zorvantis Roleplay · Ein Projekt von Nexus Studios</footer>
+
+<script>
+const RELEASE=new Date("2027-03-10T00:00:00+01:00").getTime(); // Release-Datum hier ändern
+const $=id=>document.getElementById(id),p=n=>String(n).padStart(2,"0"),last={};
+function set(id,v){const e=$(id),t=p(v);if(last[id]!==t){e.textContent=t;if(last[id]!==undefined){e.classList.remove("tick");void e.offsetWidth;e.classList.add("tick")}last[id]=t}}
+function update(){
+ let diff=RELEASE-Date.now();
+ if(diff<=0){diff=0;$("status").classList.add("on");$("stext").textContent="Status: Online";$("sub").textContent="Der Server ist online. Komm auf Discord und spiel mit.";$("timer").style.display="none";return false}
+ const s=Math.floor(diff/1000);
+ set("d",Math.floor(s/86400));set("h",Math.floor(s%86400/3600));set("m",Math.floor(s%3600/60));set("s",s%60);return true}
+if(update()){const i=setInterval(()=>{if(!update())clearInterval(i)},1000)}
+const bg=$("bg");
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches)addEventListener("pointermove",e=>{
+ bg.style.transform=`translate(${(e.clientX/innerWidth-.5)*-18}px,${(e.clientY/innerHeight-.5)*-12}px)`});
+document.querySelectorAll(".card").forEach(c=>c.addEventListener("pointermove",e=>{
+ const r=c.getBoundingClientRect();c.style.setProperty("--x",e.clientX-r.left+"px");c.style.setProperty("--y",e.clientY-r.top+"px")}));
+</script></body></html>
